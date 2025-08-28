@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Modern Notepad</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+  <!-- Navbar -->
+  <header class="bg-white shadow-md px-6 py-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold">📝 My Notepad</h1>
+    <div>
+      <button class="text-sm px-3 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600">Logout</button>
+    </div>
+  </header>
+
+  <!-- Main Layout -->
+  <div class="flex h-screen">
+
+    <!-- Sidebar -->
+    <aside class="w-1/4 bg-white shadow-md p-4 overflow-y-auto">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="font-semibold text-lg">Notes</h2>
+        <button class="text-sm px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600">+ New</button>
+      </div>
+      <ul class="space-y-2">
+      <% for(note of notes){%>
+        <li>
+          <a href="/note" class="block p-3 rounded-lg bg-gray-50 hover:bg-gray-200">
+            <h3 class="font-semibold truncate"><%=note.title%></h3>
+            <p class="text-sm text-gray-600 truncate"><%=note.content%></p>
+          </a>
+        </li>
+       <%}%>
+      </ul>
+    </aside>
+
+    <!-- Editor Area -->
+    <main class="flex-1 p-6">
+      <form method="POST" action="/new?_method=PUT" class="h-full flex flex-col">
+        <input type="text" placeholder="Note Title"
+               class="text-2xl font-bold w-full border-b-2 p-2 mb-4 outline-none focus:border-blue-500"
+               name="title" />
+
+        <textarea placeholder="Write your notes here..." name="content"
+                  class="flex-1 p-4 border rounded-lg resize-none outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+
+        <div class="mt-4 flex justify-end gap-3">
+          <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">Save</button>
+          <button type="button" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">Delete</button>
+        </div>
+      </form>
+    </main>
+  </div>
+
+</body>
+</html>
