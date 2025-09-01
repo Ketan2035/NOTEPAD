@@ -1,24 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Modern Notepad</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="style.css"/>
-</head>
-<body class="bg-gray-100 text-gray-900 h-screen">
-
-  <!-- Navbar -->
-  <header class="bg-gray-800  shadow-md px-6 py-4 flex justify-between items-center">
-    <h1 class="text-2xl  text-white font-bold">📝 My Notepad</h1>
-    <div>
-      <button class="text-sm px-3 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600">Logout</button>
-    </div>
-  </header>
-
+<% layout("/layouts/boilerplate")%>
+<body class="bg-gray-100 text-gray-900 h-viewport">
   <!-- Main Layout -->
-  <div class="flex h-[85%]">
-
+  <div class="flex w-screen h-[85vh]">
     <!-- Sidebar -->
     <aside class="w-1/4 bg-gray-400 shadow-md p-4 overflow-y-auto">
       <div class="flex justify-between items-center ">
@@ -27,7 +10,7 @@
       <ul class="space-y-2">
       <% for(note of notes){%>
         <li>
-          <a href="/note" class="block p-3 rounded-lg bg-gray-200 hover:bg-gray-50">
+          <a href="/note/<%=note.id%>" class="block p-3 rounded-lg bg-gray-200 hover:bg-gray-50">
             <h3 class="font-semibold truncate"><%=note.title%></h3>
             <p class="text-sm text-gray-600 truncate"><%=note.content%></p>
             <div class="date">
@@ -43,7 +26,7 @@
     <!-- Editor Area -->
     <main class="flex-1 p-6 overflow-y-auto">
       <h1 class="text-bold font-4xl">Write something...</h1>
-      <form method="POST" action="/new?_method=PUT" class="h-full flex flex-col">
+      <form method="POST" action="/?_method=PUT" class="h-full flex flex-col">
         <input type="text" placeholder="Note Title"
                class="text-2xl font-bold w-full border-b-2 p-2 mb-4 outline-none focus:border-blue-500"
                name="title" />
@@ -57,6 +40,4 @@
       </form>
     </main>
   </div>
-
 </body>
-</html>
