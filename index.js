@@ -66,7 +66,7 @@ app.get("/",async(req,res)=>{
 //res.json({data:notes})
 })
 
-//edit route
+//view route
 
 app.get("/note/:id",async(req,res)=>{
     let {id}=req.params;
@@ -74,6 +74,16 @@ app.get("/note/:id",async(req,res)=>{
     let notes= await note.find();
     res.render("viewnote.ejs",{Note,notes} );
 })
+
+//edit route
+
+app.get("/notes/:id/edit",async(req,res)=>{
+    let {id}=req.params;
+    let Note=await note.findById(id);
+    let notes= await note.find();
+    res.render("edit.ejs",{Note,notes} );
+})
+
 
 app.listen(8080,(req,res)=>{
     console.log("connected successfully");
